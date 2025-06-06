@@ -1,0 +1,50 @@
+**Log Analysis Basics – Network-Based Attack Detection Using UFW**
+
+I will perform a network port scan on a linux machine and then see the logs for detection. I will use UFW as a firewall to see the scan attempt. UFW stands for Uncomplicated Firewall whcih is a simple firewall in linux, which can be used to add barrier in your system. 
+
+Log files are stored in **var/logs/ufw.log.** This stores all the **system and network-related messages.** 
+
+### Network Port Scan
+
+This is a scan which is done for checking the response and the openness of the port on the victim machine. This can be dangerous because it can show the open ports line FTP, SSH, SMTP which can be later on used to access the victim machine by the attacker. 
+
+**Nmap** Can be used for the network port scan on a network or a machine. 
+
+### **UFW?**
+
+- UFW stands for Uncomplicated Firewall, a frontend for iptables.
+- Simplifies firewall management for Linux users.
+- Used to allow, deny, and manage traffic rules easily.
+- Logs are stored in `/var/log/ufw.log`.
+- Rule file `/etc/ufw/before.rules`
+- To check ufw status `ufw status`
+- To check the rule number `ufw status numbered`
+
+### UFW Rule Syntax
+
+- Basic allow rule: ufw allow
+- Deny a port: ufw deny
+- Allow by service: ufw allow (e.g., ufw allow ssh)
+- Allow by IP: ufw allow from
+- Allow specific port from IP: ufw allow from to any port
+- Delete rule: ufw delete allow
+
+### Step 1
+
+Attack from the attacker machine using nmap
+`nmap -p80 TARGET-IP`
+
+### Step 2
+
+Instal ufw on the host Machine 
+
+`sudo apt install ufw`
+`sudo ufw enable
+sudo ufw logging on
+sudo ufw logging high`
+
+add custom rules in the ufw suing this command
+
+`sudo ufw deny from attacker to any port 80 proto tcp`
+
+the logs can be seen in `ufw.log`

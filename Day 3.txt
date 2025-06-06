@@ -1,0 +1,27 @@
+Lets learn about how to Explore and Analyze Windows PowerShell Logs
+
+in this i would be working on how to generate the logs and after generation, how to analyze because logs are the first step to detect any anomaly in your system or in the network
+
+For a precaution you must enable logging related to power shell
+
+### Some important Event IDs
+
+- **Event ID 4104**: Script block logging, capturing the PowerShell commands executed.
+- **Event ID 4103**: Command invocation with parameter binding (detailed command execution).
+- **Event ID 4698**: PowerShell Module Logging for the execution of specific modules.
+- **Event ID 4101**: Execution of PowerShell commands through command-line arguments.
+
+### Step 1:
+
+Run this command on Power Shell 
+
+`Start-Process "notepad.exe" -ArgumentList "C:\Windows\System32\drivers\etc\hosts”` 
+
+This opens this file on notepad `C:\Windows\System32\drivers\etc\hosts` only can be run as admin
+
+### Step 2:
+
+Go to application logs under event viewer and then search for the event ID you want
+this can show you the details of the action occurred which was written in logs 
+
+A attacker can use it to attack the system using LOLABS which are legit windows tools but can be used to do actions like to execute power shell scripts, execute DLLs, download things silently, create scheduled tasks etc
